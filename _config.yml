@@ -5,6 +5,8 @@ locale: en_US
 description: Not a real ninja.
 logo: site-logo.png
 search: true
+comments: true
+
 #url: http://localhost:4000
 
 # Jekyll configuration
@@ -36,7 +38,7 @@ owner:
   name: Santiago Baldrich
   avatar: sbaldrich.png
   email: santiago.baldrich[at]gmail.com
-  disqus-shortname:
+  disqus-shortname: sbaldrich
   twitter: elgatoninja
   facebook: #username
   github: sbaldrich
