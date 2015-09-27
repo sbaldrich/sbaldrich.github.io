@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Day 1: Three \"easy\" Problems"
+title: "(3/300): Three \"easy\" Problems"
 modified:
 categories: cp
 excerpt:
