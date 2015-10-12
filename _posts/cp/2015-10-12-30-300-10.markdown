@@ -1,0 +1,143 @@
+---
+layout: post
+title: "(30/300): 10%"
+modified:
+categories: cp
+excerpt:
+tags: [300pch, c++, python, math, greedy]
+image:
+  feature:
+date: 2015-10-12T11:58:32-05:00
+---
+
+Back to c++ and Topcoder! Another set of simple problems while I try to get on schedule and think on how to solve a couple of harder problems.
+
+### Kolya and Tanya
+[Source](http://codeforces.com/problemset/problem/584/B)
+
+A very interesting counting problem. There are \\( 3^{3n} \\) possible ways to distribute coins, and 7 ways for each group to have 6 coins in total.
+
+{% highlight python %}
+n = int(input())
+print((27 ** n - 7 ** n) % (10 ** 9 + 7))
+{% endhighlight %}
+
+### Towers
+[Source](http://codeforces.com/problemset/problem/479/B)
+
+Greedily remove a block from the highest tower and add it to the shortest one until there are no more operations available.
+
+{% highlight python %}
+n, k = map(int, input().split())
+ops = 0
+height = list(map(int, input().split()))
+ans = []
+
+while(ops < k):
+    pos_lo, lo = min(enumerate(height), key=lambda x: x[1])
+    pos_hi, hi = max(enumerate(height), key=lambda x: x[1])
+    if(hi == lo):
+        break
+    height[pos_lo] += 1
+    height[pos_hi] -= 1
+    ans.append((pos_hi + 1, pos_lo + 1))
+    ops += 1
+print(max(height) - min(height), ops)
+print('\n'.join(str(x) + ' ' + str(y) for (x, y) in ans))
+{% endhighlight %}
+
+### Cdgame
+[Source](http://community.topcoder.com/stat?c=problem_statement&pm=14062&rd=16550)
+
+Test all possibilities in *O(len(a) * len(b))*
+
+{% highlight python %}
+class Cdgame:
+    def rescount(self, a, b):
+        sa = sum(a)
+        sb = sum(b)
+        s = set()
+        for i in a:
+            for j in b:
+                s.add((sa-i+j) * (sb-j+i))
+        return len(s)
+{% endhighlight %}
+
+### Drbalance
+[Source](http://community.topcoder.com/stat?c=problem_statement&rd=16550&pm=14060)
+
+The best way to add a new '+' is to add it on the left side of the string. Add new '+' signs to the string and calculate its negativity until it reaches a value less than or equal to *k*.
+
+{% highlight python %}
+class Drbalance:
+    def lesscng(self, s, k):
+        s = list(s)
+
+        def neg(s):
+            n = 0
+            for i in range(1, len(s)+1):
+                n += s[:i].count('+') < s[:i].count('-')
+            return n
+        ans = 0
+        while(neg(s) > k):
+            s[s.index('-')] = '+'
+            ans += 1
+        return ans
+{% endhighlight %}
+
+### LiveConcert
+[Source](http://community.topcoder.com/stat?c=problem_statement&pm=13948&rd=16549)
+
+For each idol get the song with the max happiness value and add them all.
+
+{% highlight c++ %}
+#include <bits/stdc++.h>
+
+using namespace std;
+
+class LiveConcert {
+public:
+  int maxHappiness(vector <int> h, vector <string> s) {
+    map<string,int> song;
+    int n = s.size();
+    for(int i = 0; i < n; i++){
+      if(song.find(s[i]) != song.end())
+        song[s[i]] = h[i] > song[s[i]] ? h[i] : song[s[i]];
+      else song[s[i]] = h[i];
+    }
+    int ans = 0;
+    for(map<string,int> :: iterator it = song.begin(); it != song.end(); it++)
+      ans += it -> second;
+    return ans;
+  }
+};
+{% endhighlight %}
+
+### CombiningSlimes
+[Source](http://community.topcoder.com/stat?c=problem_statement&pm=13947&rd=16549)
+
+It's not hard to prove that the order in which the operations are performed does not change the final result.
+
+{% highlight c++%}
+#include <bits/stdc++.h>
+
+using namespace std;
+
+class CombiningSlimes {
+public:
+  int maxMascots(vector <int> a) {
+    int ans = 0;
+    while(a.size() > 1){
+      int x = a.back(); a.pop_back();
+      int y = a.back(); a.pop_back();
+      a.push_back(x + y);
+      ans += x*y;
+    }
+    return ans;
+  }
+};
+{% endhighlight %}
+
+### Conclusion
+
+I found out that using Atom plus a terminal visor (iTerm, TotalTerminal) is a good enough way of writing solutions in python and c++, we'll see how that goes during a competition.
