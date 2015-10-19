@@ -13,7 +13,7 @@ date: 2015-09-22T19:59:09-05:00
 Three problems. Three languages. <del>Three</del> Two stupid mistakes.
 
 ### Raising Bacteria
-[Source](http://codeforces.com/problemset/problem/579/A)
+<a href="http://codeforces.com/problemset/problem/579/A" target="_blank">Source</a>
 
 Look at the problem in reverse and find out the minimum number of bacteria that should be removed to get to the origin. This corresponds to the number of times an odd number is obtained on successive divisions by 2 or the number of set bits on the binary representation of the initial number. **Fun fact:** The number of set bits is called a *population count* or the *Hamming weight*.
 
@@ -30,7 +30,7 @@ int main() {
 {% endhighlight %}
 
 ### Kefa and First Steps
-[Source](http://codeforces.com/problemset/problem/580/A)
+<a href="http://codeforces.com/problemset/problem/580/A" target="_blank">Source</a>
 
 Find the longest non-decreasing sub-segment, nothing to explain. *Stupid mistake:* I read *subsequence* the first time.
 
@@ -61,7 +61,7 @@ public class Main{
 
 ### Kefa and Company
 
-[Source](http://codeforces.com/problemset/problem/580/B).
+<a href="http://codeforces.com/problemset/problem/580/B" target="_blank">Source</a>.
 
 Sort everyone by the amount of money they have. The answer now lies within a sub-segment, taking advantage of the initial sorting, check all the valid ones and return the one with the biggest friendship factor. *Stupid mistake:* I didn't check for differences of exactly *d* units.
 

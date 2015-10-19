@@ -14,7 +14,7 @@ I didn't have a lot of time to solve problems this week so I'm getting behind sc
 a "coding binge" soon.
 
 ### Kefa and Park
-[source](http://codeforces.com/contest/580/problem/C)
+<a href="http://codeforces.com/contest/580/problem/C" target="_blank">source</a>
 
 A simple *dfs* that keeps track of the number of (consecutive) cats seen up to each node is enough to solve this problem.
 
@@ -66,7 +66,7 @@ public class KefaAndPark {
 {% endhighlight %}
 
 ### Little Elephant and T-Shirts
-[source](https://www.codechef.com/problems/TSHIRTS)
+<a href="https://www.codechef.com/problems/TSHIRTS" target="_blank">source</a>
 
 This is a *must-solve* problem for anyone trying to learn how to use bitmasks to handle states with Dynamic Programming. The *dp* table keeps track of the number of ways we can select the t-shirts given that we have already processed shirts 1 up to *i* and we're in the state described by the mask (bit *i* set means person *i* already has a t-shirt).
 
@@ -115,7 +115,7 @@ public class TSHIRTS {
 {% endhighlight %}
 
 ### Kefa and Dishes
-[source](http://codeforces.com/contest/580/problem/D)
+<a href="http://codeforces.com/contest/580/problem/D" target="_blank">source</a>
 
 Another *DP + bitmasks* problem. This time the *dp(m,j)* table holds the maximum satisfaction Kefa can obtain given that the dishes described by the mask *m* have been taken and *j* is the last dish taken.
 
@@ -181,7 +181,7 @@ public class KefaAndDishes {
 {% endhighlight %}
 
 ### Finding Team Members
-[source](http://codeforces.com/contest/579/problem/B)
+<a href="http://codeforces.com/contest/579/problem/B" target="_blank">source</a>
 
 Greedy. Sort all the given teams in descending order by strength and keep taking the best one still possible on each step.
 

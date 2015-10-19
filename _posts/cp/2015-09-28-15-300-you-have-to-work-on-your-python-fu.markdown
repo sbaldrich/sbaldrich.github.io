@@ -13,7 +13,7 @@ date: 2015-09-28T21:48:06-05:00
 Some easy problems, all in python this time.
 
 ### Lala Land and Apple Trees
-[Source](http://codeforces.com/problemset/problem/558/A)
+<a href="http://codeforces.com/problemset/problem/558/A" target="_blank">Source</a>
 
 It's easy to see that we're only going to be able to get to *l* trees on each side were *l* is the minimum number of trees on both sides. If the lengths are different, we can get one more (if there are 4 trees on the left and 3 on the right, start by the left side to get all 4 trees)
 
@@ -38,7 +38,7 @@ print(ans)
 
 
 ### Currency System in Geraldion
-[Source](http://codeforces.com/problemset/problem/560/A)
+<a href="http://codeforces.com/problemset/problem/560/A" target="_blank">Source</a>
 
 Is there a banknote with the number 1? then all sums are possible. There isn't? ok, 1 is the smallest sum.
 
@@ -50,7 +50,7 @@ print(-1 if min(a) == 1 else 1)
 
 
 ### Simple Game
-[Source](http://codeforces.com/problemset/problem/570/B)
+<a href="http://codeforces.com/problemset/problem/570/B" target="_blank">Source</a>
 
 We only need to beat Misha by one. Choose the largest available segment and choose the number in front of him. Look out for the corner case.
 
@@ -61,7 +61,7 @@ print( 1 if n == 1 else m + 1 if n - m > m - 1 else m - 1 )
 
 
 ### Elections
-[Source](http://codeforces.com/problemset/problem/570/A)
+<a href="http://codeforces.com/problemset/problem/570/A" target="_blank">Source</a>
 Just do what the statement says.
 
 {% highlight python %}
@@ -74,7 +74,7 @@ print(score.index(max(score)) + 1)
 {% endhighlight%}
 
 ### Arrays
-[Source](http://codeforces.com/problemset/problem/572/A)
+<a href="http://codeforces.com/problemset/problem/572/A" target="_blank">Source</a>
 
 Choose the *k* smallest numbers from the first array and the *m* largest numbers from the second one. A single comparison can tell us the answer.
 
@@ -89,7 +89,7 @@ print("YES" if a1[-1] < a2[0] else "NO")
 {% endhighlight %}
 
 ### Order Book
-[Source](http://codeforces.com/problemset/problem/572/B)
+<a href="http://codeforces.com/problemset/problem/572/B" target="_blank">Source</a>
 This problem is similar to the previous one. Aggregate the buy and sell orders and sort in descending order. Take the *s* best ones (smallest sell orders and largest buy orders).
 
 {% highlight python %}
@@ -114,7 +114,7 @@ for order in sorted(buy.items(), reverse = True )[:s]:
 
 
 ### Bear and Elections
-[Source](http://codeforces.com/problemset/problem/574/A)
+<a href="http://codeforces.com/problemset/problem/574/A" target="_blank">Source</a>
 
 Steal a vote from the rival the with most votes until Limak has a sure win. A linear search for the best rival on each step or sorting the rivals' vote array is enough to solve the problem. A heap is also an option.
 
@@ -139,7 +139,7 @@ print(ans)
 {% endhighlight %}
 
 ### Multiplication Table
-[Source](http://codeforces.com/problemset/problem/577/A)
+<a href="http://codeforces.com/problemset/problem/577/A" target="_blank">Source</a>
 
 *x* can appear once on each row *i* where the modulo between *x* and *i* is 0. Additionally, *x* will be present only if *x / i <= n* (we would count numbers outside of the table if we ignore this check).
 

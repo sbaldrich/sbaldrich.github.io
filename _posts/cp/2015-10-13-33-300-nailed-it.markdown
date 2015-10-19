@@ -4,7 +4,7 @@ title: "(33/300): Nailed It!"
 modified:
 categories: cp
 excerpt:
-tags: [gcd, brute force, java]
+tags: [300pch, gcd, brute force, java]
 image:
   feature:
 date: 2015-10-13T21:07:26-05:00
@@ -13,7 +13,7 @@ date: 2015-10-13T21:07:26-05:00
 Three new problems for today. I submitted the third one (*GCD Table*), during the competition and received **WA** but today I nailed it.
 
 ### VerySecureEncryption
-[Source](http://community.topcoder.com/stat?c=problem_statement&pm=14005&rd=16548)
+<a href="http://community.topcoder.com/stat?c=problem_statement&pm=14005&rd=16548" target="_blank">Source</a>
 
 Simply do what the statement says.
 
@@ -34,7 +34,7 @@ public class VerySecureEncryption{
 {% endhighlight%}
 
 ### IsItASquare
-[Source](http://community.topcoder.com/stat?c=problem_statement&pm=14004&rd=16548)
+<a href="http://community.topcoder.com/stat?c=problem_statement&pm=14004&rd=16548" target="_blank">Source</a>
 
 Try all permutations of the points (a total of \\(24\\)) and compare all distances. The diagonals should also be taken into account to make sure we found a square and not a rhombus.
 
@@ -71,7 +71,7 @@ public class IsItASquare{
 {% endhighlight%}
 
 ### GCD Table
-[Source](http://codeforces.com/problemset/problem/583/C)
+<a href="http://codeforces.com/problemset/problem/583/C" target="_blank">Source</a>
 
 Let \\(m\\) be the largest element in the table, since \\(gcd(x, x) = x\\), we can safely extract the \\(m\\) from the table and add it to the answer. Now, let \\(n\\) be the second largest element in the table. We can be sure that it belongs to the answer, however, we now must also remove \\(gcd(m,n)\\) and \\(gcd(n,m)\\). Repeat this procedure until the original array is complete.
 

@@ -13,7 +13,7 @@ date: 2015-10-10T14:10:01-05:00
 Finally, after a sequence of major things (that Murphy himself seems to have devised) that stopped me from continuing with the challenge , I'm back with some more problems. A very nice math problem, a cute scala implementation and some easy python problems this time.
 
 ### Worms
-[Source](http://codeforces.com/problemset/problem/474/B)
+<a href="http://codeforces.com/problemset/problem/474/B" target="_blank">Source</a>
 
 Create a *cumsum* array with the number of worms present on each group and do a binary search for each juicy worm. You can also use something like [bisect_left](http://codeforces.com/contest/474/submission/8858078).
 
@@ -43,7 +43,7 @@ print('\n'.join(ans))
 {% endhighlight %}
 
 ### Keyboard
-[Source](http://codeforces.com/problemset/problem/474/A)
+<a href="http://codeforces.com/problemset/problem/474/A" target="_blank">Source</a>
 
 Look forward or behind depending on the given direction shift.
 
@@ -57,7 +57,7 @@ print(''.join(ans))
 {% endhighlight %}
 
 ### Olesya and Rodion
-[Source](http://codeforces.com/problemset/problem/584/A)
+<a href="http://codeforces.com/problemset/problem/584/A" target="_blank">Source</a>
 
 Depending on whether *t == 10*, you can easily create a number that satisfies the given conditions. Watch out for the special case, *e.g., t == 10 && n == 1*.
 
@@ -72,7 +72,7 @@ else:
 {% endhighlight %}
 
 ### Robot's task
-[Source](http://codeforces.com/problemset/problem/583/B)
+<a href="http://codeforces.com/problemset/problem/583/B" target="_blank">Source</a>
 
 The optimal strategy is to go all the way to each side taking all the possible information before turning.
 
@@ -92,7 +92,7 @@ print(turn)
 {% endhighlight %}
 
 ### Asphalting Roads
-[Source](http://codeforces.com/problemset/problem/583/A)
+<a href="http://codeforces.com/problemset/problem/583/A" target="_blank">Source</a>
 
 Using a couple of dictionaries, find out if the roads have been looked at before. If **none** of them have been visited, asphalt both of them.
 
@@ -111,7 +111,7 @@ print(' '.join(str(x) for x in ans))
 {% endhighlight %}
 
 ### Developing Skills
-[Source](http://codeforces.com/problemset/problem/581/C)
+<a href="http://codeforces.com/problemset/problem/581/C" target="_blank">Source</a>
 
 Very nice problem. The first thing to notice is that improving a particular skill will be of no use unless we increase it to the next multiple of 10, this means that the ones whose modulo 10 is bigger, are the ones we should improve first (more ROI). Another thing to notice is that we can get the rating before using improvement units and then add the rating obtained from using them to improve skills.
 So, we can solve the problem by sorting the skills on their *mod10* and using the improvement units to get them to the next multiple of 10. If there are more units available, use them all and see if the rating is under the top limit (10 * n)
@@ -132,7 +132,7 @@ print(min(rating + k // 10, 10 * n))
 {% endhighlight %}
 
 ### Luxurious Houses
-[Source](http://codeforces.com/problemset/problem/581/B)
+<a href="http://codeforces.com/problemset/problem/581/B" target="_blank">Source</a>
 
 The code speaks for itself.
 
@@ -149,7 +149,7 @@ print(' '.join([str(x) for x in ans]))
 {% endhighlight %}
 
 ### Vasya the Hipster
-[Source](http://codeforces.com/problemset/problem/581/A)
+<a href="http://codeforces.com/problemset/problem/581/A" target="_blank">Source</a>
 
 The code speaks for itself.
 
@@ -163,7 +163,7 @@ print(mixed, single)
 {%endhighlight%}
 
 ### Amr and the Large Array
-[Source](http://codeforces.com/problemset/problem/558/B)
+<a href="http://codeforces.com/problemset/problem/558/B" target="_blank">Source</a>
 
 Any array with the maximum beauty that does not start and end with the same number can be reduced. For each *x*, save the initial position and the end position as well as its beauty and, among all the generated triplets (start, end, beauty) take the shortest one that has the same beauty as the original array (which clearly would be the max).
 

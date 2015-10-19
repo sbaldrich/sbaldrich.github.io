@@ -1,24 +1,22 @@
 ---
 layout: post
-title: "(37/300) Simple DP"
+title: "(37/300): Simple DP"
 modified:
 categories: cp
 excerpt:
-tags: []
+tags: [300pch, dp, ad-hoc]
 image:
   feature:
 date: 2015-10-17T11:05:58-05:00
 ---
 
 ### FlowerGarden
-[Source](http://community.topcoder.com/stat?c=problem_statement&pm=1918&rd=5006)
+<a href="http://community.topcoder.com/stat?c=problem_statement&pm=1918&rd=5006" target="_blank">Source</a>
 
 This is a problem I've solved many times and for some reason every time I revisit it, I manage to get it wrong the first time. The thing here is that one is tempted to write a simple sorting routine or try to accommodate each flower by looking only at the flowers that have already been planted  ಠ_ಠ. The key insight here is that we should **plant the largest flower that can be placed in front of all flowers left to plant**. With this in mind, the solution becomes quite simple.
 I wrote the solution in c++ just because and with readability in mind (the `flower` struct and the sorting routine are not necessary, for example).
 
 {% highlight c++ %}
-#include<bits/stdc++.h>
-
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -75,7 +73,7 @@ vector <int> getOrdering(vector <int> height, vector <int> bloom, vector <int> w
 
 
 ### BadNeighbors
-[Source](http://community.topcoder.com/tc?module=ProblemDetail&rd=5009&pm=2402)
+<a href="http://community.topcoder.com/tc?module=ProblemDetail&rd=5009&pm=2402" target="_blank">Source</a>
 
 To deal with the circular neighborhood, we can solve two linear problems: one containing all elements except the first and one containing all elements except the last. Now, the solution can be done recursively (python code below) or using a bottom up dp approach (c++).
 
@@ -126,7 +124,7 @@ public:
 {% endhighlight %}
 
 ### ZigZag
-[Source](http://community.topcoder.com/stat?c=problem_statement&pm=1259&rd=4493)
+<a href="http://community.topcoder.com/stat?c=problem_statement&pm=1259&rd=4493" target="_blank">Source</a>
 
 This is a *longest increasing subsequence* problem with a twist. Just keep track of the sign of each state and solve accordingly.
 
@@ -157,7 +155,7 @@ public class ZigZag{
 {% endhighlight %}
 
 ### Hawaiian
-[Source](http://community.topcoder.com/stat?c=problem_statement&pm=2358&rd=5006)
+<a href="http://community.topcoder.com/stat?c=problem_statement&pm=2358&rd=5006" target="_blank">Source</a>
 
 The code speaks for itself.
 {% highlight java %}

@@ -13,7 +13,7 @@ date: 2015-10-12T11:58:32-05:00
 Back to c++ and Topcoder! Another set of simple problems while I try to get on schedule and think on how to solve a couple of harder problems.
 
 ### Kolya and Tanya
-[Source](http://codeforces.com/problemset/problem/584/B)
+<a href="http://codeforces.com/problemset/problem/584/B" target="_blank">Source</a>
 
 A very interesting counting problem. There are \\( 3^{3n} \\) possible ways to distribute coins, and 7 ways for each group to have 6 coins in total.
 
@@ -23,7 +23,7 @@ print((27 ** n - 7 ** n) % (10 ** 9 + 7))
 {% endhighlight %}
 
 ### Towers
-[Source](http://codeforces.com/problemset/problem/479/B)
+<a href="http://codeforces.com/problemset/problem/479/B" target="_blank">Source</a>
 
 Greedily remove a block from the highest tower and add it to the shortest one until there are no more operations available.
 
@@ -47,7 +47,7 @@ print('\n'.join(str(x) + ' ' + str(y) for (x, y) in ans))
 {% endhighlight %}
 
 ### Cdgame
-[Source](http://community.topcoder.com/stat?c=problem_statement&pm=14062&rd=16550)
+<a href="http://community.topcoder.com/stat?c=problem_statement&pm=14062&rd=16550" target="_blank">Source</a>
 
 Test all possibilities in *O(len(a) * len(b))*
 
@@ -64,7 +64,7 @@ class Cdgame:
 {% endhighlight %}
 
 ### Drbalance
-[Source](http://community.topcoder.com/stat?c=problem_statement&rd=16550&pm=14060)
+<a href="http://community.topcoder.com/stat?c=problem_statement&rd=16550&pm=14060" target="_blank">Source</a>
 
 The best way to add a new '+' is to add it on the left side of the string. Add new '+' signs to the string and calculate its negativity until it reaches a value less than or equal to *k*.
 
@@ -86,7 +86,7 @@ class Drbalance:
 {% endhighlight %}
 
 ### LiveConcert
-[Source](http://community.topcoder.com/stat?c=problem_statement&pm=13948&rd=16549)
+<a href="http://community.topcoder.com/stat?c=problem_statement&pm=13948&rd=16549" target="_blank">Source</a>
 
 For each idol get the song with the max happiness value and add them all.
 
@@ -114,7 +114,7 @@ public:
 {% endhighlight %}
 
 ### CombiningSlimes
-[Source](http://community.topcoder.com/stat?c=problem_statement&pm=13947&rd=16549)
+<a href="http://community.topcoder.com/stat?c=problem_statement&pm=13947&rd=16549" target="_blank">Source</a>
 
 It's not hard to prove that the order in which the operations are performed does not change the final result.
 
