@@ -13,7 +13,7 @@ date: 2015-10-18T20:01:45-05:00
 Another couple of simple DP problems for today.
 
 ### ChessMetric
-<a href="http://community.topcoder.com/stat?c=problem_statement&pm=1592&rd=4482" target="_blank">Source</a>
+<a href="http://community.topcoder.com/stat?c=problem_statement&pm=1592&rd=4482" target="\_blank">Source</a>
 
 The recursion is simple. The number of possible ways to reach cell \\((i, j)\\) in \\(k\\) moves is the sum of all possible ways to reach (in \\(k - 1\\) moves) all cells (\\(m, n\\)) from which (\\(i, j\\)) is reachable. It is possible to solve the problem without storing the board for all \\(k\\) moves, but it is not necessary to do so.
 
@@ -64,7 +64,7 @@ public:
 {% endhighlight %}
 
 ### AvoidRoads
-<a href="http://community.topcoder.com/stat?c=problem_statement&pm=1889&rd=4709" target="_blank">Source</a>
+<a href="http://community.topcoder.com/stat?c=problem_statement&pm=1889&rd=4709" target="\_blank">Source</a>
 
 The solution is similar to the problem above. For each cell, add the number of possible ways to reach the cells from which it is reachable. Before doing so, check whether the road can be used. **Pro tip: watch out for the coordinate system**.
 
