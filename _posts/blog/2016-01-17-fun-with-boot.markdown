@@ -1,22 +1,22 @@
 ---
 layout: post
-title: "Fun with Spring Boot - I"
+title: "Fun with Spring Boot: Part I"
 modified:
 categories: blog
 excerpt:
-tags: [spring boot, spring, java, web]
+tags: [spring boot, spring, java, web, spring-data, rest]
 image:
   feature:
-date: 2016-01-17T12:30:33-05:00
+date: 2016-01-30T16:06:33-05:00
 ---
 
 I've been playing for a while with Spring and Spring boot and found out that Boot's reputation of really making easier Spring development is not undeserved.
-As a simple demonstration, this post resumes some steps required to setup a simple web application with Boot.  
+As a simple demonstration, this post resumes a couple of features I've found very useful.  
 
 ## Spring Initializr
 
-Spring provides a way to create starter projects with the [Spring Initializr](start.spring.io), enter
-the information about your project and you'll get a nice zipped file with your project all set up, another way to do it s to create a starter project using [STS](http://spring.io/tools/sts) if you have it installed. Finally (and currently my favorite choice), you can use `curl` to obtain the project. I recommend using the `--data` argument to avoid stupid mistakes when generating the project.
+Spring provides a way to create starter projects with the [Spring Initializr](start.spring.io), just enter
+the information about your project and you'll get a nice zipped file with your project all set up. Another way to do it is to create a starter project using [STS](http://spring.io/tools/sts) if you have it installed. Finally (and currently my favorite choice), you can use `curl` to obtain the project (I recommend using the `--data` argument to avoid annoying typos).
 
 {% highlight bash %}
 curl https://start.spring.io/starter.tgz --data @project-config | tar -xzvf -
@@ -25,7 +25,7 @@ curl https://start.spring.io/starter.tgz --data @project-config | tar -xzvf -
 With a project-config file such as:
 
 {% highlight bash %}
-dependencies=thymeleaf
+dependencies=thymeleaf,data-jpa,data-rest,h2
 &type=gradle-project
 &groupId=com.baldrichcorp
 &artifactId=boot-example
@@ -34,106 +34,61 @@ dependencies=thymeleaf
 &packageName=boot.example
 {% endhighlight %}
 
-## Creating a simple controller
+To run the application, use the `bootRun` task. By default, it will be listening on `localhost:8080` using an embedded Tomcat (*yup, no Tomcat setup needed*).
 
-Since all dependencies have been taken care of, we can start coding our application. Let's add a simple controller.
+## Controllers, Services and templates
 
-> src/main/java/boot/example/BootSampleApplication.java
+Since Boot takes care of configuration (in an opinionated but easily customizable way), we can start coding Services and Controllers right away. Also, if Thymeleaf is listed among the dependencies of the project, there is no additional configuration to be done. The `ViewResolver` is automatically configured to prefix `/templates` and append `.html` to the views returned by our controllers (**e.g.,** returning `"hello"` in a Controller would look for the `templates/hello.html` template), so we can just start to add templates to the `src/main/resources/templates/` directory.
 
-{% highlight java %}
-package boot.example;
+#### Setting up the front-end
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
-@SpringBootApplication
-public class BootSampleApplication {
-
-  public static void main(String[] args) {
-    SpringApplication.run(BootSampleApplication.class, args);
-  }
-
-  @Controller
-  static class SimpleController{
-    @RequestMapping("/")
-    @ResponseBody
-    public String home(){
-      return "<h3>Hello world!!</h3>";
-    }
-  }
-}
-{% endhighlight %}
-
-Run the application by using the `bootRun` task and visit `localhost:8080`
-
-{% highlight bash %}
-./gradlew bootRun
-{% endhighlight %}
-
-![boot-hello-world](/images/posts/boot-hello-world.png)
-
-## Setting up the frontend
-
-Spring Boot by default serves static resources located at `src/main/java/{public,META-INF/resources,static,resources}`, so all style and javascript sources can be put there.
-Say we want to use *JQuery* and *Bootstrap* in our web app, we could download them and put them in one of the mentioned directories or let `bower` handle this for us. To use `bower` we must first let it know that we want our libraries to be installed in `src/main/resources/..` using a `.bowerrc` file with the following contents:
+Boot serves by default static resources located inside `public`, `resources`, and `META-INF/resources` inside the `src/main/java` directories, so all style and javascript resources can be put in any of those directories to be served by Spring. If we wanted to use, say, *JQuery* and *Bootstrap* in a web app, we could download and put them in one of the mentioned directories or let [bower](http://bower.io/#install-bower) handle this for us. To do this, we must first let `bower` know that we want our libraries to be installed in `src/main/resources/**` using a `.bowerrc` file with the following contents:
 
 ```
-{
-  "directory": "src/main/resources/public"
-}
+{"directory": "src/main/resources/public"}
 ```
-
-> Don't have bower? [get it](http://bower.io/#install-bower)
 
 Then, use `bower init` to setup bower and `bower install jquery bootstrap --save` to install *JQuery* and *Bootstrap* to the project.
 
 ![boot-hello-world-bower](/images/posts/boot-hello-world-bower.png)
 
-```
-bower install jquery bootstrap --save`
-```
-
-Now we can add an html page and style it using Bootstrap.
-
-> src/main/resources/templates/hello.html
+This configuration would let us refer to any *Bootsrap* or *JQuery* assets from our templates:
 
 {% highlight html %}
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+  ...
   <head>
     <script src="/jquery/dist/jquery.min.js"></script>
     <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap-theme.min.css"></link>
     <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css"></link>
   </head>
-  <body>
-    <span class="label label-info">Hello world!</span>
-  </body>
+  ...
 </html>
 {% endhighlight %}
 
-To return it, there is only a couple of small changes that need to be done to our controller:
+## Spring Data and Spring Data rest
 
-> src/main/java/boot/example/BootSampleApplication.java
+If we list `data-rest` as a dependency of our project, we can benefit from the creation of REST endpoints to query and modify repositories. Just create some Spring Data repositories and *voilá*, you get your REST endpoints.
+Say we have a simple data model composed of team `Team` and `Developer` classes, where each team has a name and a set of developers and each developer has a name and a skill. We can create repositories for these entities as follows:
 
 {% highlight java %}
-  ...
-  @Controller
-  static class SimpleController{
-    @RequestMapping("/")
-    //@ResponseBody
-    public String home(){
-      return "hello";
-    }
-  }
+
+//TeamRepository.java
+public interface TeamRepository extends PagingAndSortingRepository<Team, Long>{ }
+
+//DeveloperRepository.java
+public interface DeveloperRepository extends PagingAndSortingRepository<Developer, Long>{
+  Iterable<Developer> findBySkill(@Param("skill") String skill);
 }
 {% endhighlight %}
 
-![boot-hello-world-bootstrap](/images/posts/boot-hello-world-bootstrap.png)
+The creation of these repositories and the fact that we have included *Spring Data Rest* (and transitively *Spring HATEOAS* and *Jackson mapper*), is enough to let us access these repositories via REST endpoints. We can even insert data into the database using POST requests.
+
+![boot-data-rest-query](/images/posts/boot-rest-data.gif)
+
+> **Tip**: by adding H2 to the dependencies of the project, Boot automatically configures an embedded database in `create-drop` mode. Setting the `spring.datasource.platform` property in the *application.properties* file lets us tell Boot to run database population script upon startup.
 
 ### Conclusion
 
-This is a very -*very*– basic use of Boot. However, it shows that Boot can greatly reduce the time necessary for configuring Spring, thus allowing to really focus on programming the particular characteristics of applications.
+These are just a couple among a lot (really, *a lot*) of useful features of Spring Boot (for example, they have great integration with Amazon Cloud Services and Netflix' OSS). Boot can greatly reduce the time necessary for configuring Spring, allowing to focus on creating powerful applications.
