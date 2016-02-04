@@ -3,14 +3,14 @@ layout: post
 title: "(52/300): Hello Again, Geometry"
 modified:
 categories: cp
-excerpt:
+excerpt: ""
 tags: [geometry, math, gcd]
 image:
   feature:
 date: 2016-02-03T18:45:33-05:00
 ---
 
-This problem arose a couple of months ago in a competition at work. I promised I'd work on it, so here it is. 
+This problem arose a couple of months ago in a competition at work. I promised I'd work on it, so here it is.
 
 ### Ancient Berland Circus
 <a href="http://codeforces.com/problemset/problem/1/C" target="\_blank">Source</a>

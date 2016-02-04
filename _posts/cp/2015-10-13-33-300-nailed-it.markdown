@@ -3,7 +3,7 @@ layout: post
 title: "(33/300): Nailed It!"
 modified:
 categories: cp
-excerpt:
+excerpt: ""
 tags: [300pch, gcd, brute force, java]
 image:
   feature:

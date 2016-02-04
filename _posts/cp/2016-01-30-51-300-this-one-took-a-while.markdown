@@ -3,7 +3,7 @@ layout: post
 title: "(51/300): This One Took a While"
 modified:
 categories: cp
-excerpt:
+excerpt: ""
 tags: [combinatorics, dp]
 image:
   feature:

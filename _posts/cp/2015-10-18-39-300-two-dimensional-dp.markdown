@@ -3,7 +3,7 @@ layout: post
 title: "(39/300): Two-dimensional DP"
 modified:
 categories: cp
-excerpt:
+excerpt: ""
 tags: [300pch, dp]
 image:
   feature:

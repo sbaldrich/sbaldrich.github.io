@@ -3,7 +3,7 @@ layout: post
 title: "Hello Jekyll!"
 modified:
 categories: blog
-excerpt:
+excerpt: ""
 tags: [jekyll]
 image:
   feature:

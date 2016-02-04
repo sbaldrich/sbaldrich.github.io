@@ -3,7 +3,7 @@ layout: post
 title: "(50/300): Long Time No See"
 modified:
 categories: cp
-excerpt:
+excerpt: ""
 tags: [300pch, math, bits, greedy]
 image:
   feature:

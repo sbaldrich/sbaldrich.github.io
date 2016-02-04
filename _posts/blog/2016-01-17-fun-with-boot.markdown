@@ -3,7 +3,7 @@ layout: post
 title: "Fun with Spring Boot: Part I"
 modified:
 categories: blog
-excerpt:
+excerpt: ""
 tags: [spring boot, spring, java, web, spring-data, rest]
 image:
   feature:

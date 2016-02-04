@@ -3,7 +3,7 @@ layout: post
 title: "(37/300): Simple DP"
 modified:
 categories: cp
-excerpt:
+excerpt: ""
 tags: [300pch, dp, ad-hoc]
 image:
   feature:

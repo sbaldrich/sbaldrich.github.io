@@ -3,7 +3,7 @@ layout: post
 title: "(15/300): Your python-fu is still weak"
 modified:
 categories: cp
-excerpt:
+excerpt: ""
 tags: []
 image:
   feature:

@@ -3,7 +3,7 @@ layout: post
 title: "(3/300): Three \"easy\" Problems"
 modified:
 categories: cp
-excerpt:
+excerpt: ""
 tags: []
 image:
   feature:

@@ -3,7 +3,7 @@ layout: post
 title: "Fun with R"
 modified:
 categories: blog
-excerpt:
+excerpt: ""
 tags: [R, Data Science]
 image:
   feature:

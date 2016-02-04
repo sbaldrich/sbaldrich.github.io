@@ -3,7 +3,7 @@ layout: post
 title: "The 300-Problem Challenge"
 modified:
 categories: blog
-excerpt:
+excerpt: ""
 tags: [competitive programming, 300pch]
 image:
   feature:

@@ -3,7 +3,7 @@ layout: post
 title: "(24/300): We're Losing Strength, Captain!"
 modified:
 categories: cp
-excerpt:
+excerpt: ""
 tags: [300pch, math, binary-search, python, scala]
 image:
   feature:

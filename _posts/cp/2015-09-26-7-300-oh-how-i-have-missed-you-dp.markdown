@@ -3,7 +3,7 @@ layout: post
 title: "(7/300): Oh How I Have Missed You, DP"
 modified:
 categories: cp
-excerpt:
+excerpt: ""
 tags: []
 image:
   feature:
