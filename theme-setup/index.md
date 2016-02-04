@@ -2,7 +2,7 @@
 layout: page
 title: Theme Setup
 excerpt: "Instructions on how to install and customize the Jekyll theme So Simple."
-modified: 2014-08-08T20:04:41.231140-04:00
+modified: 2016-01-19
 image:
   feature: so-simple-sample-image-6.jpg
   credit: WeGraphics
@@ -16,7 +16,7 @@ General notes and suggestions for customizing **So Simple Theme**.
 
 ## Installation
 
-So Simple now requires [Jekyll](http://jekyllrb.com/) 2.x. Make sure to run `gem update jekyll` if you aren't on the latest version or `gem install jekyll` if this is your first time installing it.
+So Simple now requires [Jekyll](http://jekyllrb.com/) 3.0. Make sure to run `bundle update` if you aren't on the latest version to update all gem dependencies.
 
 If you are creating a new Jekyll site using So Simple follow these steps:
 
@@ -41,7 +41,7 @@ If you want to use So Simple with an existing Jekyll site follow these steps:
 
 ## Running Jekyll
 
-If `jekyll build` and `jekyll serve` throw errors you may have to run Jekyll with `bundled exec` instead.
+The preferred method for running Jekyll is with `bundle exec`, but if you're willing to deal gem conflicts feel free to go cowboy with a `jekyll build` or `jekyll serve`.
 
 > In some cases, running executables without bundle exec may work, if the executable happens to be installed in your system and does not pull in any gems that conflict with your bundle.
 >
@@ -153,7 +153,7 @@ To set what links appear in the top navigation edit `_data/navigation.yml`. Use 
 While completely optional, I've included Octopress and some starter templates to automate the creation of new posts and pages. To take advantage of it start by installing the [Octopress](https://github.com/octopress/octopress) gem if it isn't already.
 
 {% highlight bash %}
-$ gem install octopress --pre
+$ gem install octopress
 {% endhighlight %}
 
 ### New Post
@@ -167,7 +167,7 @@ $ octopress new post "Post Title"
 Default works great if you want all your posts in one directory, but if you're like me and want to group them into subfolders like `/posts`, `/portfolio`, etc. Then this is the command for you. By specifying the DIR it will create a new post in that folder and populate the `categories:` YAML with the same value.
 
 {% highlight bash %}
-$ octopress new post "New Post Title" --dir posts
+$ octopress new post "New Article Title" --dir articles
 {% endhighlight %}
 
 ### New Page
