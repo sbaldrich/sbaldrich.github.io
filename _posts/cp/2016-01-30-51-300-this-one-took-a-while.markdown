@@ -21,7 +21,7 @@ Given the conditions, we can think of the problem as a matter of sorting the jew
 
 Check the <a href="https://github.com/sbaldrich/algo/wiki/Dynamic-Programming#prefsums" target="\_blank">subset sums</a> and <a href="https://github.com/sbaldrich/algo/wiki/Combinatorics#bin" target="\_blank">binomial coefficients</a> wikis for more info.
 
-{% highlight java%}
+{% highlight java %}
 import java.util.*;
 
 public class Jewelry{
