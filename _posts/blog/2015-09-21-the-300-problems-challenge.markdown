@@ -16,7 +16,7 @@ why I am taking a *300 problem challenge* to help me regain some skills I lost s
 The conditions for the challenge are the following:
 
 * All solutions should be added to my competitive programming [repo](http://github.com/sbaldrich/cp) and a quick summary should be [posted](http://sbaldrich.github.io/cp/).
-* The time limit is ~100 days (until the end of 2015 on [AoE](http://www.timeanddate.com/time/zones/aoe))
+* <del>The time limit is ~100 days (until the end of 2015 on [AoE](http://www.timeanddate.com/time/zones/aoe))</del> No limit, just do it.
 * There should be no more than 200 easy problems (*levels A,B on Codeforces, 250 - 500 div2 on Topcoder, etc*) and there must be at least 50 hard problems (*Codeforces D or Topcoder 500+ div1*).
 * Any programming language is allowed.
 * I should take part in as many programming competitions as possible.
