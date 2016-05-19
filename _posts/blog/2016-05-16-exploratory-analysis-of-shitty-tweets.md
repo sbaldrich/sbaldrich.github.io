@@ -14,7 +14,7 @@ date: 2016-05-16T20:08:13-05:00
 library(dplyr)
 library(ggplot2)
 library(lubridate)
-tw <- read.csv("tweets.csv", stringsAsFactors = FALSE)
+tw <- read.csv("tweets.csv", stringsAsFactors = FALSE, encoding = "UTF-8")
 {% endhighlight %}
 
 {% highlight R %}
@@ -82,3 +82,39 @@ ggplot(data = tw, aes(timeonly)) +
 {% endhighlight %}
 
 ![tweets_by_hour](/images/posts/tweets_by_hour.png)
+
+
+## Text Processing
+
+{% highlight R %}
+library(tm)
+tweets <- stri_trans_general(tw$text, "Latin-ASCII")
+tweets <- Corpus(VectorSource(tweets))
+tweets <- tm_map(tweets, removePunctuation)
+tweets <- tm_map(tweets, tolower)
+tweets <- tm_map(tweets, removeWords, stopwords("spanish"))
+tweets <- tm_map(tweets, removeWords, stopwords("english"))
+tweets <- tm_map(tweets, removeWords, "rt")
+tweets <- tm_map(tweets, removeNumbers)
+tweets <- tm_map(tweets, stripWhitespace)
+tweets <- tm_map(tweets, trimws)
+tweets <- tm_map(tweets, PlainTextDocument)
+
+tdm <- TermDocumentMatrix(tweets)
+dtm <- DocumentTermMatrix(tweets)
+
+freq <- colSums(as.matrix(dtm))
+wf <- data.frame(word=names(freq), freq=freq)
+
+ggplot(subset(wf, freq > 100 & stri_length(word) > 3), aes(word, freq)) +
+geom_bar(stat="identity") +
+theme(axis.text.x=element_text(angle=45, hjust=1))
+{% endhighlight %}
+
+![words_no_stemming](/images/posts/words_no_stemming.png)
+
+![words_no_stemming_freq_100_length_4](/images/posts/words_no_stemming_freq_100_length_4.png)
+
+![words_no_stemming_freq_50_length_5](/images/posts/words_no_stemming_freq_50_length_5.png)
+
+![words_cloud](/images/posts/word_cloud.png)
