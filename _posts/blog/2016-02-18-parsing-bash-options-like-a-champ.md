@@ -18,7 +18,7 @@ Say we want to create a script _parrot.sh_ whose sole purpose in this world is t
 [[ $# -gt 0 ]] && echo $@
 {% endhighlight %}
 
-![parrot-2](/images/posts/parrot-1.png)
+![parrot-2](/figs/2016-02-18-parsing-bash-options-like-a-champ/parrot-1.png)
 
 Easy, huh? But I find this parrot boring, so let's now say we want to be able to choose the color of the output. We could accomplish this by using the first argument as the color selector and the rest of the arguments as the string to be echoed.
 
@@ -55,7 +55,7 @@ fi
 
 Since we might still want to use `parrot` without colored output, the script first checks whether the first argument is an actual color and if it isn't, the argument is echoed normally. Let's test the new script:
 
-![parrot-3](/images/posts/parrot-3.png)
+![parrot-3](/figs/2016-02-18-parsing-bash-options-like-a-champ/parrot-3.png)
 
 *Oh*, there is a problem. The output is clearly not what is intended whenever we want to output a phrase that starts with a word that could be interpreted as a color. We could add a sentinel value to the color array but it seems quite *hacky*. Additionally, what if we wanted to add another another functionality, such as word replacing or printing every argument in uppercase? Clearly this script could get out of control really fast.
 
@@ -92,7 +92,7 @@ shift $((OPTIND - 1)) # Now $1 refers to the first non-option
 
 In this new version, we can pass a `-c` option to the script to choose the color and we're back to printing all the *non-option* arguments as we did in our first version. Pay attention to the `shift` command, if we weren't using it, we'd echo all arguments (including options). Additionally, a `usage` message has been added to let clients know how to use the script. The `":c:"` string passed to `getopts` enables the *fail-silent* mode (no error messages are output by `getopts`) and defines an option `-c` that takes a mandatory argument.
 
-![parrot-4](/images/posts/parrot-4.png)
+![parrot-4](/figs/2016-02-18-parsing-bash-options-like-a-champ/parrot-4.png)
 
 Finally, let's say we want to add an option to output our phrase using uppercase. Now that we know how to use `getopts` it is only a matter of adding the new option to the `case` statement and using `tr` to modify our arguments. **Note:** *I'm using the version of bash that came preinstalled with El Capitan and the `${var^^}` option to change a string into uppercase isn't working, ergo, I had to use `tr`.*
 
@@ -147,7 +147,7 @@ color "$COLOR" && echo "$ret"
 
 We can now mix our options as we like:
 
-![parrot-5](/images/posts/parrot-5.png)
+![parrot-5](/figs/2016-02-18-parsing-bash-options-like-a-champ/parrot-5.png)
 
 ### Conclusion
 

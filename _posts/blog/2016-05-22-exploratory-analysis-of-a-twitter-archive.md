@@ -299,7 +299,6 @@ ggplot(arrange(word.freq.nh, desc(freq)) %>% top_n(50)) + aes(word, freq) +
 Let's see the word cloud again ignoring twitter handles.
 
 {% highlight R%}
-library(wordcloud)
 
 wordcloud(word.freq.nh$word, word.freq.nh$freq, min.freq=25, color = pal)
 
@@ -309,6 +308,8 @@ wordcloud(word.freq.nh$word, word.freq.nh$freq, min.freq=25, color = pal)
 ### Conclusion
 
 This post has gotten very long and I still have some things I'd like to do with my Twitter archive. A more serious text analysis could be done on the tweets (*e.g.* Hierarchical clustering, K-means, sentiment analysis, etc.) so I guess I'll revisit this topics on a future post.
+
+All the code used for this post can be found [here](https://github.com/sbaldrich/labs/blob/master/R/twitter-archive.R).
 
 ### References
 

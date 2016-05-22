@@ -99,7 +99,7 @@ axis(1, at = xLabels, labels = FALSE)
 text(xLabels, time.span[xLabels], srt = 45, pos = 1, y = 0, xpd = TRUE)
 {% endhighlight %}
 
-![Image You should be seeing a plot](/images/posts/plot.png)
+![Image You should be seeing a plot](/figs/2015-09-19-fun-with-r/plot.png)
 
 ### Conclusion
 

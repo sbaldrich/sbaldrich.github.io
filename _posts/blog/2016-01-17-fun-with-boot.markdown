@@ -50,7 +50,7 @@ Boot serves by default static resources located inside `public`, `resources`, an
 
 Then, use `bower init` to setup bower and `bower install jquery bootstrap --save` to install *JQuery* and *Bootstrap* to the project.
 
-![boot-hello-world-bower](/images/posts/boot-hello-world-bower.png)
+![boot-hello-world-bower](/figs/2016-01-30-fun-with-spring-boot-part-1/boot-hello-world-bower.png)
 
 This configuration would let us refer to any *Bootsrap* or *JQuery* assets from our templates:
 
@@ -85,7 +85,7 @@ public interface DeveloperRepository extends PagingAndSortingRepository<Develope
 
 The creation of these repositories and the fact that we have included *Spring Data Rest* (and transitively *Spring HATEOAS* and *Jackson mapper*), is enough to let us access these repositories via REST endpoints. We can even insert data into the database using POST requests.
 
-![boot-data-rest-query](/images/posts/boot-rest-data.gif)
+![boot-data-rest-query](/figs/2016-01-30-fun-with-spring-boot-part-1/boot-rest-data.gif)
 
 > **Tip**: by adding H2 to the dependencies of the project, Boot automatically configures an embedded database in `create-drop` mode. Setting the `spring.datasource.platform` property in the *application.properties* file lets us tell Boot to run database population script upon startup.
 
