@@ -1,13 +1,13 @@
 ---
 layout: post
-title: Exploratory Analysis of Shitty Tweets
+title: "Exploratory Analysis of a Twitter Archive"
 modified:
 categories: blog
 excerpt: ""
 tags: []
 image:
   feature:
-date: 2016-05-16T20:08:13-05:00
+date: 2016-05-22T17:47:29-05:00
 ---
 
 I finally had the chance of start working with R again and figured that analyzing my tweet archive would be a nice way of refreshing my skills. Although in the past it was necessary to parse JSON, Twitter now gives you a nice `tweets.csv` file containing all your tweets. Cool.
@@ -21,7 +21,7 @@ library(ggplot2)
 library(lubridate)
 library(scales)
 
-tw <- read.csv("tweets.csv", stringsAsFactors = FALSE, encoding = "UTF-8")
+tw <- read.csv("tweets.csv", stringsAsFactors = FALSE)
 
 {% endhighlight %}  
 
@@ -179,7 +179,7 @@ xlab("Characters per Tweet") + ylab("Number of tweets")
 
 ![chars-per-tweet](/figs/2016-05-22-exploratory-analysis-shitty-tweets/9-chars-per-tweet.png)
 
-Woah, nice! I seem to be more likely to use few characters or go all the way in with 140. There are some weird tweets with more than 140 characters but it turns out that the extra ones are from special characters (`\n`, `&gt` and the like). Also, I don't remember using so little characters (less than ten):
+Woah, nice! I seem to be more likely to use few characters or go all the way in with 140. There are some weird tweets with more than 140 characters but it turns out that the extra ones are from special characters (`\n`, `&gt;` and the like). Also, I don't remember using so little characters (less than ten):
 
 <blockquote class="twitter-tweet" data-lang="en"><p lang="in" dir="ltr">Caramba.</p>&mdash; El gato. (@elgatoninja) <a href="https://twitter.com/elgatoninja/status/672253597904687104">December 3, 2015</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -195,34 +195,124 @@ Oh.
 ## Fine, But What the Hell do All These Tweets Say?
 
 {% highlight R %}
-library(tm)
-tweets <- stri_trans_general(tw$text, "Latin-ASCII")
-tweets <- Corpus(VectorSource(tweets))
-tweets <- tm_map(tweets, removePunctuation)
-tweets <- tm_map(tweets, tolower)
-tweets <- tm_map(tweets, removeWords, stopwords("spanish"))
-tweets <- tm_map(tweets, removeWords, stopwords("english"))
-tweets <- tm_map(tweets, removeWords, "rt")
-tweets <- tm_map(tweets, removeNumbers)
-tweets <- tm_map(tweets, stripWhitespace)
-tweets <- tm_map(tweets, trimws)
-tweets <- tm_map(tweets, PlainTextDocument)
 
-tdm <- TermDocumentMatrix(tweets)
-dtm <- DocumentTermMatrix(tweets)
+> summary(tw$type)
+  tweet   reply  r.self mention      RT
+   7409    2304     151     542    2472
 
-freq <- colSums(as.matrix(dtm))
-wf <- data.frame(word=names(freq), freq=freq)
+> nrow(filter(tw, type != "RT"))
+  [1] 10406
 
-ggplot(subset(wf, freq > 100 & stri_length(word) > 3), aes(word, freq)) +
-geom_bar(stat="identity") +
-theme(axis.text.x=element_text(angle=45, hjust=1))
 {% endhighlight %}
 
-![words_no_stemming](/images/posts/words_no_stemming.png)
+Ignoring the TTF, I've written 10406 between tweets, replies, mentions and replies to myself. To see what all these tweets say, I used a really nice text mining package called `tm` which I would've loved knowing about when working on my thesis.  
 
-![words_no_stemming_freq_100_length_4](/images/posts/words_no_stemming_freq_100_length_4.png)
+### Preprocessing the tweets
 
-![words_no_stemming_freq_50_length_5](/images/posts/words_no_stemming_freq_50_length_5.png)
+{% highlight R %}
+library(tm)
+library(stringi)
 
-![words_cloud](/images/posts/word_cloud.png)
+tw <- mutate(tw, text = stri_trans_general(text, "Latin-ASCII"))
+stopwords <- c(stopwords("spanish"), stopwords("english"))
+
+corpus <- Corpus(VectorSource(filter(tw,type != "RT")$text))
+corpus <- tm_map(corpus, removePunctuation)
+corpus <- tm_map(corpus, tolower)
+corpus <- tm_map(corpus, removeWords, stopwords)
+corpus <- tm_map(corpus, PlainTextDocument)
+
+dtm <- DocumentTermMatrix(corpus)
+freq <- colSums(as.matrix(dtm))
+word.freq <- data.frame(word = names(freq), freq = freq)
+{% endhighlight %}
+
+I got a Document-Term matrix and a word frequency data frame. Let's take a look at the most frequent words among my tweets. Let's see how the distribution of frequencies behaves.
+
+### The most frequent terms
+
+{% highlight R%}
+
+> quantile(word.freq$freq, c(seq(.5, .8, .1), seq(.9,1,.01)))
+50%  60%  70%  80%  90%  91%  92%  93%  94%  95%  96%  97%  98%  99% 100%
+  1    2    2    3    7    8    8   10   11   13   15   19   27   42  383
+
+{% endhighlight %}
+
+Half of the words in my tweets after removing stopwords and with no stemming (we'll get to that in a bit) appear only once. Moreover, only 6% of them appear more than 10 times. However, this 6% still represents 868 words which wouldn't fit nicely in a graph. How about the top 50 most used words?
+
+{% highlight R%}
+
+ggplot(arrange(word.freq, desc(freq)) %>% top_n(50)) + aes(word, freq) +
+geom_bar(stat="identity", aes(fill = freq)) +
+theme(axis.text.x=element_text(angle=45, hjust=1), legend.position = "none") +
+xlab("Word") + ylab("Number of times")
+
+{% endhighlight %}
+
+![top-50-words](/figs/2016-05-22-exploratory-analysis-shitty-tweets/10-top-50-words.png)
+
+Huh. Even without retweets, user handles take a lot of the weight which seems to indicated that I interact with other users more than I thought. Also, handles appearing in the top of the list makes sense because they are always written in the same way, you either mention a person using the correct handle or you don't. On the other hand, since I haven't used stemming (yet), words that should be grouped together (*e.g.* eat, eating, eats) are being counted independently. Before moving on, let's see a nice word cloud with the current words.
+
+{% highlight R%}
+library(wordcloud)
+
+set.seed(42) # The answer the ultimate question of Life, the Universe and Everything   
+pal <- brewer.pal(9, "Blues")
+pal <- pal[-(1:4)]
+wordcloud(word.freq$word, word.freq$freq, min.freq=25, color = pal)
+
+{% endhighlight %}
+
+![word-cloud](/figs/2016-05-22-exploratory-analysis-shitty-tweets/11-word-cloud.png)
+
+### Dealing with handles
+
+Knowing that I interact a lot with some people is nice, but handles are polluting the information about what I say on Twitter. Let's remove them and see what we get.
+
+{% highlight R%}
+handle.pattern <- "@[a-zA-Z0-9_]+"
+
+corpus.nh <- Corpus(VectorSource(
+  (filter(tw, type != "RT") %>%
+    mutate(text=stri_replace_all(text, "", regex=handle.pattern)))$text
+))
+corpus.nh <- tm_map(corpus.nh, removePunctuation)
+corpus.nh <- tm_map(corpus.nh, tolower)
+corpus.nh <- tm_map(corpus.nh, trimws)
+corpus.nh <- tm_map(corpus.nh, removeWords, stopwords)
+corpus.nh <- tm_map(corpus.nh, PlainTextDocument)
+
+dtm.nh <- DocumentTermMatrix(corpus.nh)
+freq.nh <- colSums(as.matrix(dtm.nh))
+word.freq.nh <- data.frame(word = names(freq.nh), freq = freq.nh)
+
+ggplot(arrange(word.freq.nh, desc(freq)) %>% top_n(50)) + aes(word, freq) +
+  geom_bar(stat="identity", aes(fill = freq)) +
+  theme(axis.text.x=element_text(angle=45, hjust=1), legend.position = "none") +
+  xlab("Word") + ylab("Number of times")
+
+{% endhighlight %}
+
+![top-50-words-no-handles](/figs/2016-05-22-exploratory-analysis-shitty-tweets/12-top-50-words-no-handles.png)
+
+Let's see the word cloud again ignoring twitter handles.
+
+{% highlight R%}
+library(wordcloud)
+
+wordcloud(word.freq.nh$word, word.freq.nh$freq, min.freq=25, color = pal)
+
+{% endhighlight %}
+![word-cloud](/figs/2016-05-22-exploratory-analysis-shitty-tweets/13-word-cloud-no-handles.png)
+
+### Conclusion
+
+This post has gotten very long and I still have some things I'd like to do with my Twitter archive. A more serious text analysis could be done on the tweets (*e.g.* Hierarchical clustering, K-means, sentiment analysis, etc.) so I guess I'll revisit this topics on a future post.
+
+### References
+
+* [Julia Silge's blog](http://juliasilge.com/blog/Ten-Thousand-Tweets/)
+* [Roger D. Peng's R Programming](https://leanpub.com/rprogramming)
+* [Roger D. Peng's Exploratory Data Analysis with R](https://leanpub.com/exdata)
+* [Statistical Research - Text Mining](http://statistical-research.com/text-mining/?utm_source=rss&utm_medium=rss&utm_campaign=text-mining)
