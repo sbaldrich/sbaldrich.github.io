@@ -227,7 +227,7 @@ freq <- colSums(as.matrix(dtm))
 word.freq <- data.frame(word = names(freq), freq = freq)
 {% endhighlight %}
 
-I got a Document-Term matrix and a word frequency data frame. Let's take a look at the most frequent words among my tweets. Let's see how the distribution of frequencies behaves.
+I got a Document-Term matrix and a word frequency data frame. Let's see how the distribution of frequencies behaves.
 
 ### The most frequent terms
 
