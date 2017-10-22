@@ -79,7 +79,7 @@ object KefaAndCompany {
 
     var best = 0L
     var currentTotal = 0L
-    var low = 0     
+    var low = 0
 
     for( i <- 0 until n ){
       currentTotal += a(i)._2
@@ -90,8 +90,8 @@ object KefaAndCompany {
       best = math.max(currentTotal, best)
     }
 
-    println(best)    
-  }  
+    println(best)
+  }
 }
 
 {% endhighlight %}

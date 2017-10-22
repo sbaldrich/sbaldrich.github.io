@@ -354,3 +354,7 @@ object GottaCatchEmAll extends App{
   println(ans)
 }
 {% endhighlight %}
+
+## Some Last Words
+
+* Noticed that neat trick for checking whether a number is integer using the modulo operator? ( ͡° ͜ʖ ͡°)
