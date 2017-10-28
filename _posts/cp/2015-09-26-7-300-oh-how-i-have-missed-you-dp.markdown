@@ -153,6 +153,32 @@ public class TSHIRTS {
 }
 {% endhighlight %}
 
+#### Bonus Python solution
+
+{% highlight python %}
+MOD = 1000000007
+T = int(input())
+SHIRTS = 101
+
+for t in range(T):
+    N = int(input())
+    owns = [[False] * SHIRTS for _ in range(N)]
+    for i in range(0, N):
+        for s in map(int, input().split()):
+            owns[i][s] = True
+    dp = [[0] * (1 << N) for _ in range(SHIRTS)]
+    dp[0][0] = 1
+
+    for s in range(1, SHIRTS):
+        for m in range(1 << N):
+            dp[s][m] = dp[s - 1][m]
+            for b in range(N):
+                if m & (1 << b) and owns[b][s]:
+                    dp[s][m] = (dp[s][m] + dp[s-1][m ^ (1 << b)]) % MOD
+    print(dp[SHIRTS - 1][(1 << N) - 1])
+{% endhighlight%}
+
+
 ### Kefa and Dishes
 <a href="http://codeforces.com/contest/580/problem/D" target="_blank">source</a>
 
@@ -217,6 +243,44 @@ public class KefaAndDishes {
     return in.readLine().split("\\s+");
   }
 }
+{% endhighlight %}
+
+#### Bonus (TLE'd) Python solution
+
+<small>I really tried to get a Python solution accepted, but so far it doesn't seem that anyone in Codeforces (including me) has been able to get past case 15 </small>
+
+{% highlight python %}
+def main():
+
+    n, m, k = list(map(int, input().split()))
+    a = list(map(int, input().split()))
+    DISHES = 20
+    r = [0] * DISHES * DISHES
+    dp = [0] * n * (1 << n)
+
+    for _ in range(k):
+        f, t, s = list(map(int, input().split()))
+        r[(f - 1) * DISHES + t - 1] = s
+
+    ans = 0
+    for mask in range(1 << n):
+        for b in range(n):
+            plate = 1 << b
+            if mask & plate:
+                dishes = 1
+                wask = mask ^ plate
+                if wask:
+                    for i in range(n):
+                        if wask & (1 << i):
+                            dishes += 1
+                            dp[mask * n + b] = max(dp[wask * n + i] + r[i * DISHES + b] + a[b], dp[mask * n + b])
+                else:
+                    dp[mask * n + b] = a[b]
+                if m == dishes:
+                    ans = max(ans, dp[mask * n + b])
+    print(ans)
+
+main()
 {% endhighlight %}
 
 ### Finding Team Members
