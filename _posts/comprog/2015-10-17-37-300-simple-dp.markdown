@@ -1,0 +1,174 @@
+---
+layout: post
+title: "(37/300): Simple DP"
+modified:
+categories: comprog
+
+tags: [300pch, dp, ad-hoc]
+
+date: 2015-10-17T11:05:58-05:00
+---
+
+### FlowerGarden
+<a href="http://community.topcoder.com/stat?c=problem_statement&pm=1918&rd=5006" target="_blank">Source</a>
+
+This is a problem I've solved many times and for some reason every time I revisit it, I manage to get it wrong the first time. The thing here is that one is tempted to write a simple sorting routine or try to accommodate each flower by looking only at the flowers that have already been planted  ಠ_ಠ. The key insight here is that we should **plant the largest flower that can be placed in front of all flowers left to plant**. With this in mind, the solution becomes quite simple.
+I wrote the solution in c++ just because and with readability in mind (the `flower` struct and the sorting routine are not necessary, for example).
+
+{% highlight c++ %}
+#include<bits/stdc++.h>
+
+using namespace std;
+
+struct flower{
+  flower(int height, int bloom, int wilt) : height(height), bloom(bloom), wilt(wilt) {}
+  int height, bloom, wilt;
+  bool operator < (const flower& that) const{
+    return this -> height < that.height;
+  }
+};
+
+bool overlap(const flower& first, const flower& second){
+  if (first.bloom <= second.bloom)
+  return first.wilt >= second.bloom;
+  return second.wilt >= first.bloom;
+}
+
+class FlowerGarden {
+public:
+vector <int> getOrdering(vector <int> height, vector <int> bloom, vector <int> wilt) {
+  int n = height.size();
+  vector<flower> flowers;
+  vector<bool> planted = vector<bool>(n, false);
+  vector<int> ans;
+  int flowers_left = n;
+
+  for(int i = 0; i < n; i++)
+      flowers.push_back(flower(height[i], bloom[i], wilt[i]));
+  sort(flowers.begin(), flowers.end());
+
+  while(flowers_left--){
+    int next = -1;
+    for(int i = n - 1; i >= 0; i--){
+      if(planted[i])
+        continue;
+      next = i;
+      for(int j = 0; next != -1 && j < n; j++){
+        if(i == j || planted[j])
+          continue;
+        if(overlap(flowers[i], flowers[j]) && flowers[i].height > flowers[j].height)
+          next =- 1;
+      }
+      if(next != -1)
+        break;
+    }
+    ans.push_back(flowers[next].height);
+    planted[next] = true;
+  }
+  return ans;
+  }
+};
+{% endhighlight %}
+
+
+### BadNeighbors
+<a href="http://community.topcoder.com/tc?module=ProblemDetail&rd=5009&pm=2402" target="_blank">Source</a>
+
+To deal with the circular neighborhood, we can solve two linear problems: one containing all elements except the first and one containing all elements except the last. Now, the solution can be done recursively (python code below) or using a bottom up dp approach (c++).
+
+{% highlight python %}
+memo = dict()
+
+def f(donations):
+    if(tuple(donations) in memo):
+        return memo[tuple(donations)]
+    if(len(donations) < 3):
+        return max(donations)
+    if(len(donations) == 3):
+        return max(donations[0] + donations[2], donations[1])
+    memo[tuple(donations)] = max(donations[0] + f(donations[2:]), f(donations[1:]))
+    return memo[tuple(donations)]
+
+class BadNeighbors:
+    def maxDonations(self, donations):
+        return max(f(donations[:-1]), f(donations[1:]))
+
+{% endhighlight %}
+
+Since each of the linear problems can be solved using a one-dimensional array \\( dp\_{i} = max(dp\_{i-1},dp\_{i-2} + donation\_{i})\\) , we can solve the circular dependency problem by having a two-column table where the first column contains the best solution so far without taking the first element (first subproblem) and the second column taking it into account (second subproblem).
+
+{% highlight c++ %}
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int dp[50][2];
+
+class BadNeighbors {
+public:
+	int maxDonations(vector <int> donations) {
+		int n = donations.size();
+		dp[0][0] = 0;
+		dp[0][1] = donations[0];
+		dp[1][0] = donations[1];
+		dp[1][1] = max(donations[0], donations[1]);
+		for(int i = 2; i < n; i++){
+			int &money = donations[i];
+			dp[i][0] = max(money + dp[i-2][0], dp[i-1][0]);
+			dp[i][1] = max(money + dp[i-2][1], dp[i-1][1]);
+		}
+		return max(dp[n-1][0], dp[n-2][1]);
+	}
+};
+{% endhighlight %}
+
+### ZigZag
+<a href="http://community.topcoder.com/stat?c=problem_statement&pm=1259&rd=4493" target="_blank">Source</a>
+
+This is a *longest increasing subsequence* problem with a twist. Just keep track of the sign of each state and solve accordingly.
+
+{% highlight java %}
+public class ZigZag{
+   public int longestZigZag(int[] seq){
+    int n = seq.length, best = Integer.MIN_VALUE;
+        boolean[] neg = new boolean[n];
+        int[] dp = new int[n];
+        for(int i = 0; i < n; i++){
+          if(i == 0)
+                dp[i] = 1;
+            else{
+                for(int j=0; j < i; j++){
+                    if(seq[j] == seq[i])
+                        continue;
+                    if( (dp[j] == 1 || neg[j] != seq[j] > seq[i]) && dp[i] < dp[j] + 1){
+                      neg[i] = seq[j] > seq[i];
+                        dp[i] = dp[j] + 1;  
+                    }
+                }
+            }
+            best = Math.max(best, dp[i]);
+        }
+        return best;
+  }
+}
+{% endhighlight %}
+
+### Hawaiian
+<a href="http://community.topcoder.com/stat?c=problem_statement&pm=2358&rd=5006" target="_blank">Source</a>
+
+The code speaks for itself.
+{% highlight java %}
+import java.util.*;
+
+public class Hawaiian{
+
+	public String[] getWords(String sentence){
+		String words[] = sentence.split("\\s+");
+		List<String> hawaiian = new ArrayList<>();
+		for(String word : words)
+			if(word.toLowerCase().matches("[aeiouhklmnpw]+"))
+				hawaiian.add(word);
+		return hawaiian.toArray(new String[hawaiian.size()]);
+	}
+}
+{% endhighlight %}

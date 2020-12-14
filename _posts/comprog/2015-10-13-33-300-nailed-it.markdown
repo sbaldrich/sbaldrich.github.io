@@ -1,0 +1,102 @@
+---
+layout: post
+title: "(33/300): Nailed It!"
+modified:
+categories: comprog
+
+tags: [300pch, gcd, brute force, java]
+
+date: 2015-10-13T21:07:26-05:00
+---
+
+Three new problems for today. I submitted the third one (*GCD Table*), during the competition and received **WA** but today I nailed it.
+
+### VerySecureEncryption
+<a href="http://community.topcoder.com/stat?c=problem_statement&pm=14005&rd=16548" target="_blank">Source</a>
+
+Simply do what the statement says.
+
+{% highlight java%}
+public class VerySecureEncryption{
+  public String encrypt(String message, int[] key, int K){
+    char[] current = message.toCharArray();
+    char[] next = new char[message.length()];
+    for(int times = 0; times < K; times++ ){
+      for(int i = 0; i < key.length; i++ ){
+        next[ key[i] ] = current[i];
+      }
+      System.arraycopy(next, 0, current, 0, next.length);
+    }
+    return String.valueOf(current);
+  }
+}
+{% endhighlight%}
+
+### IsItASquare
+<a href="http://community.topcoder.com/stat?c=problem_statement&pm=14004&rd=16548" target="_blank">Source</a>
+
+Try all permutations of the points (a total of \\(24\\)) and compare all distances. The diagonals should also be taken into account to make sure we found a square and not a rhombus.
+
+{% highlight java%}
+public class IsItASquare{
+  public int distSq(int x1, int y1, int x2, int y2){
+    int dx = x2 - x1;
+    int dy = y2 - y1;
+    return dx * dx + dy * dy;
+  }
+
+  public String isSquare(int[] x, int[] y){
+    for(int a = 0; a < 4; a++){
+      for(int b = 0; b < 4 && (b != a); b++){
+        for(int c = 0; c < 4 && (c != a) && (c != b); c++){
+          int d = 0;
+          while( (d == a) || (d == b) || (d == c) )
+            d++;
+          int ab = distSq( x[a], y[a], x[b], y[b] );
+          int bc = distSq( x[b], y[b], x[c], y[c] );
+          int cd = distSq( x[c], y[c], x[d], y[d] );
+          int da = distSq( x[d], y[d], x[a], y[a] );
+          int ac = distSq( x[a], y[a], x[c], y[c] ) ;
+          int bd = distSq( x[b], y[b], x[d], y[d] ) ;
+
+          if( (ab == bc) && (bc == cd) && (cd == da) && (ac == bd) )
+            return "It's a square";
+        }
+      }
+    }
+    return "Not a square";
+  }
+}
+{% endhighlight%}
+
+### GCD Table
+<a href="http://codeforces.com/problemset/problem/583/C" target="_blank">Source</a>
+
+Let \\(m\\) be the largest element in the table, since \\(gcd(x, x) = x\\), we can safely extract the \\(m\\) from the table and add it to the answer. Now, let \\(n\\) be the second largest element in the table. We can be sure that it belongs to the answer, however, we now must also remove \\(gcd(m,n)\\) and \\(gcd(n,m)\\). Repeat this procedure until the original array is complete.
+
+
+{% highlight python%}
+from fractions import gcd
+
+n = int(input())
+a = sorted(list(map(int, input().split())))
+count = {}
+for i in a:
+    count[i] = count.get(i, 0) + 1
+
+ans = []
+i = n-1
+while(len(ans) < n):
+    top = a.pop()
+    while(count[top] < 1):
+        top = a.pop()
+    count[top] -= 1
+    ans.append(top)
+    for i in range(len(ans)):
+        count[gcd(ans[-1], ans[i])] -= 2
+print(' '.join(str(x) for x in ans))
+{% endhighlight%}
+
+### Conclusion
+
+Never forget to *copy your arrays* instead of just assigning references to them!.
