@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "(33/300): Nailed It!"
+title: "Nailed It!"
 modified:
 categories: comprog
 

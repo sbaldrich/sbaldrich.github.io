@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "(39/300): Two-dimensional DP"
+title: "Two-dimensional DP"
 modified:
 categories: comprog
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "(3/300): Three \"easy\" Problems"
+title: "Three \"easy\" Problems"
 modified:
 categories: comprog
 tags: []

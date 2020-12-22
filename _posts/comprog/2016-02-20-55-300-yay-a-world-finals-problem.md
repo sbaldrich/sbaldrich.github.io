@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "(55/300): Yay! a World Finals Problem"
+title: "Yay! a World Finals Problem"
 modified:
 categories: comprog
 

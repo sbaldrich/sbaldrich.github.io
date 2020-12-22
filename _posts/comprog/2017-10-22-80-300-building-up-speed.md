@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "(80/300): Building Up Speed"
+title: "Building Up Speed"
 modified:
 categories: comprog
 

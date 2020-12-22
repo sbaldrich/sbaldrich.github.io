@@ -1,11 +1,9 @@
 ---
 layout: post
-title: "(37/300): Simple DP"
+title: "Simple DP"
 modified:
 categories: comprog
-
 tags: [300pch, dp, ad-hoc]
-
 date: 2015-10-17T11:05:58-05:00
 ---
 

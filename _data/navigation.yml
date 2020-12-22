@@ -1,9 +1,7 @@
 # Sample site navigation bar links
 
-- title: All
-  url: /
 - title: Blog
-  url: /blog/
+  url: /
 - title: Comprog
   url: /comprog/
 # - title: Categories

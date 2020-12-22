@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "(15/300): Your python-fu is still weak"
+title: "Your python-fu is still weak"
 modified:
 categories: comprog
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "(52/300): Hello Again, Geometry"
+title: "Hello Again, Geometry"
 modified:
 categories: comprog
 

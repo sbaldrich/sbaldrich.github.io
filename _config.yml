@@ -21,7 +21,7 @@ title: "Unnamed Goose Blog"
 description: "Come Procrastinate With Me"
 baseurl: # the subpath of your site, e.g. "/blog"
 url: # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
-logo: /images/site-logo-alter.png # path of site logo, e.g. "/images/logo.png"
+logo:  # path of site logo, e.g. "/images/logo.png"
 date_format: "%B %-d, %Y"
 read_time: # reading time estimates, e.g. true
 words_per_minute: # 200
@@ -51,7 +51,7 @@ feed:
   path: atom.xml
 
 # Pagination - https://jekyllrb.com/docs/pagination/
-paginate: 10
+paginate: 5
 paginate_path: /page:num/
 
 # Search
@@ -111,5 +111,8 @@ footer_links:
   - title: Twitter
     url: https://twitter.com/droptableplanet
     icon: fab fa-twitter-square
+  - title: LinkedIn
+    url: https://linkedin.com/in/sbaldrich
+    icon: fab fa-linkedin
 
 copyright: "What kind of psycopath reads footers?<br>2020. Santiago Baldrich"

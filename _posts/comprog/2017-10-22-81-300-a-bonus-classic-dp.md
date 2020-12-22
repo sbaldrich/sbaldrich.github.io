@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "(81/300): A Bonus Classic DP"
+title: "A Bonus Classic DP"
 modified:
 categories: comprog
 

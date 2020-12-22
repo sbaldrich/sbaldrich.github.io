@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "(53/300): Always Take Notes"
+title: "Always Take Notes"
 modified:
 categories: comprog
 tags: []

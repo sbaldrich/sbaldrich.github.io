@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "(50/300): Long Time No See"
+title: "Long Time No See"
 modified:
 categories: comprog
 

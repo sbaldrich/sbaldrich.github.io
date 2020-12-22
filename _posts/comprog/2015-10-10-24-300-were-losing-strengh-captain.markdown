@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "(24/300): We're Losing Strength, Captain!"
+title: "We're Losing Strength, Captain!"
 modified:
 categories: comprog
 

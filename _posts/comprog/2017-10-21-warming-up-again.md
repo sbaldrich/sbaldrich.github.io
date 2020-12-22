@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "(75/300): Warming up again"
+title: "Warming up again"
 modified:
 categories: comprog
 

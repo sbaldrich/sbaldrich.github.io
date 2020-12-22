@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "(54/300): Cellphone Typing"
+title: "Cellphone Typing"
 modified:
 categories: comprog
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "(51/300): This One Took a While"
+title: "This One Took a While"
 modified:
 categories: comprog
 

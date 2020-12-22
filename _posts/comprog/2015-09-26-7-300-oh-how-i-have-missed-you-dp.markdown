@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "(7/300): Oh How I Have Missed You, DP"
+title: "Oh How I Have Missed You, DP"
 modified:
 categories: comprog
 
